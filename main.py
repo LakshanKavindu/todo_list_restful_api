@@ -109,6 +109,12 @@ class Todo(Resource):
 
 api.add_resource(Todo,"/api/todo/<string:action>")
 
+# end points
+#get all todos  : http://127.0.0.1:5000/api/todo/all
+#get one with id :http://127.0.0.1:5000/api/todo/3
+#post a todo : http://127.0.0.1:5000/api/todo/fetch
+#delete a todo with id : http://127.0.0.1:5000/api/todo/2
+
 
 if __name__ == "__main__":
     app.run(debug=True)
