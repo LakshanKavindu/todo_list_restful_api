@@ -106,6 +106,8 @@ class Todo(Resource):
 
             return {"status":"todo added succesfully"},200
 
+   
+
 
     @cross_origin()
     def delete(self,action):
@@ -119,6 +121,7 @@ class Todo(Resource):
 
 
         return {"status":"deleted succesfully"}
+    
         
 
 

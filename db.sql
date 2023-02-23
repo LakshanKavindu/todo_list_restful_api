@@ -12,3 +12,6 @@ CREATE TABLE `new_table` (
 insert into new_table ('username','todoname','is_deleted') values("nipun","do react",0);
 insert into new_table ('username','todoname','is_deleted') values("gattu","do react and vanilla js",0);
 insert into new_table ('username','todoname','is_deleted') values("charuka","do shiny stuff",0);
+
+
+alter table new_table add is_done int default 0;
