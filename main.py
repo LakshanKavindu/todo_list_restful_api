@@ -67,7 +67,7 @@ class Todo(Resource):
 
     def get_one(self,action):
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute(""" select * from new_table where id=%s""",(action))
+        cursor.execute(""" select * from new_table where id=%s""",[action])
         data = cursor.fetchone()
         mysql.connection.commit()
         cursor.close()
