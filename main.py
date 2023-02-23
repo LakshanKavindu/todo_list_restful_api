@@ -38,6 +38,10 @@ def abort_if_todoname_is_already_exist(todoname,data):
     return 
 
 
+def abort_if_all_inputs_are_empty():
+    return
+
+
 
 
 ###################################### end of abort actions ###############################################
@@ -115,12 +119,14 @@ class Todo(Resource):
         
 
         cursor= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute("""delete from new_table where id=%s""",(action))
+        cursor.execute("""delete from new_table where id=%s""",[action])
         mysql.connection.commit()
         cursor.close()
 
 
         return {"status":"deleted succesfully"}
+    
+
     
         
 
