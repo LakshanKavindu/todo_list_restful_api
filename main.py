@@ -94,6 +94,7 @@ class Todo(Resource):
 
     @cross_origin()
     def post(self,action):
+       
         if action=="fetch":
             args=todo_put_args.parse_args()
             username = args['username']
@@ -110,6 +111,22 @@ class Todo(Resource):
 
             return {"status":"todo added succesfully"},200
 
+        else:
+            
+        
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute("""UPDATE new_table
+                              SET is_done = 1
+                              WHERE id = %s;""",[action])
+            mysql.connection.commit()
+            cursor.close()
+
+            return {"status":"todo done added success"}
+
+        
+
+        
+
    
 
 
@@ -125,6 +142,10 @@ class Todo(Resource):
 
 
         return {"status":"deleted succesfully"}
+
+    
+
+    
     
 
     
@@ -143,6 +164,7 @@ api.add_resource(Todo,"/api/todo/<string:action>")
 #post a todo : http://127.0.0.1:5000/api/todo/fetch
 #delete a todo with id : http://127.0.0.1:5000/api/todo/2
 
+#isdone :  http://127.0.0.1:5000/api/todo/18
 
 if __name__ == "__main__":
     app.run(debug=True)
