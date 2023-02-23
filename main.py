@@ -26,6 +26,16 @@ todo_put_args.add_argument("is_deleted",type=str,help="todo is deleted or not",r
 
 ######################################## abort actions ##################################################
 
+def abort_if_todoname_is_already_exist(todoname,data):
+    names = []
+    for i in data:
+        names.append(i['todoname'])
+    if todoname in names:
+         abort(404,message = "todoname is already exist")
+    
+    
+        
+    return 
 
 
 
@@ -39,11 +49,8 @@ class Todo(Resource):
     @cross_origin()
     def get(self,action):
         if action == "all":
-            cursor= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute(""" select * from new_table""")
-            data = cursor.fetchall()
-            mysql.connection.commit()
-            cursor.close()
+            data = self.get_all()
+           
 
         else:
             data = self.get_one(action)
@@ -63,6 +70,16 @@ class Todo(Resource):
 
         return data
 
+    def get_all(self):
+        cursor= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(""" select * from new_table""")
+        data = cursor.fetchall()
+        mysql.connection.commit()
+        cursor.close()
+
+        return data
+
+
 
 
 
@@ -78,6 +95,8 @@ class Todo(Resource):
             username = args['username']
             todoname = args['todoname']
             is_deleted = args['is_deleted']
+            data = self.get_all()
+            abort_if_todoname_is_already_exist(todoname,data)
 
             cursor= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
             cursor.execute("""insert into new_table (username,todoname,is_deleted) values(%s,%s,%s)""",(username,todoname,is_deleted))
