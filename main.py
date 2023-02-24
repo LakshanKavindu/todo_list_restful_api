@@ -104,7 +104,7 @@ class Todo(Resource):
             abort_if_todoname_is_already_exist(todoname,data)
 
             cursor= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute("""insert into new_table (username,todoname,is_deleted) values(%s,%s,%s)""",(username,todoname,is_deleted))
+            cursor.execute("""insert into new_ta (username,todoname,is_deleted) values(%s,%s,%s)""",(username,todoname,is_deleted))
             mysql.connection.commit()
             cursor.close()
 
@@ -141,7 +141,7 @@ class Todo(Resource):
         cursor.close()
 
 
-        return {"status":"deleted succesfully"}
+        return {"status":"medicine deleted succesfully"}
 
     
 

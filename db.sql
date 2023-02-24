@@ -1,5 +1,5 @@
-create database todo_db;
-use todo_db;
+
+use id20353168_todo_db;
 CREATE TABLE `new_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
